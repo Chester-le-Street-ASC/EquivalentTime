@@ -1,0 +1,8 @@
+{
+  "name": "CLSASC/EquivalentTime",
+  "autoload": {
+    "psr-0" : {
+        "CLSASC\\EquivalentTime" : "src"
+    }
+  }
+}
