@@ -1,5 +1,5 @@
 {
-  "name": "clsasc/equivalenttime",
+  "name": "clsasc/equivalent-time",
   "autoload": {
     "psr-0" : {
         "CLSASC\\EquivalentTime" : "src"
