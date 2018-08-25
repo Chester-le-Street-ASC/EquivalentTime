@@ -10,24 +10,19 @@ namespace CLSASC\EquivalentTime;
  */
 class TurnsPerHundred {
 
-  public static function turnsPerHundred($source_pool_length) {
+  public static function getNumber($source_pool_length) {
 		$flag;
 
     switch ($source_pool_length) {
 			case '50m':
 				$flag = 1;
 				break;
-			case '33.3m':
-			case '33m':
 			case '33 1/3m':
 			case '36 2/3y':
-			case '36.6y':
 			case '33 1/3y':
-			case '33.3y':
 				$flag = 2;
 				break;
 			case '27 1/2y':
-			case '27.5y':
 			case '25m':
 			case '25y':
 				$flag = 3;
