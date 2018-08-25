@@ -107,12 +107,3 @@ class EquivalentTime {
     $this->formattedString = $boolean;
   }
 }
-
-try {
-  $obj = new EquivalentTime("25m", "200 Free", 116.68);
-} catch (Exception $obj) {
-  var_dump($obj);
-}
-var_dump($obj);
-$obj->setOutputAsString(true);
-echo $obj->getConversion("50m");
