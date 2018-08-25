@@ -100,4 +100,51 @@ class Event {
 
 		return false;
   }
+
+	public static function distance($event = null) {
+		if ($event == null && $this->ev != null) {
+			$event = $this->ev;
+		}
+
+		$distance = 0;
+
+		switch ($event) {
+			case '50 Free':
+			case '50 Breast':
+			case '50 Fly':
+			case '50 Back':
+				$distance = 50;
+				break;
+			case '100 Free':
+			case '100 Breast':
+			case '100 Fly':
+			case '100 Back':
+			case '100 IM':
+				$distance = 100;
+				break;
+			case '200 Free':
+			case '200 Breast':
+			case '200 Fly':
+			case '200 Back':
+			case '200 IM':
+				$distance = 200;
+				break;
+			case '400 Free':
+			case '400 IM':
+				$distance = 400;
+				break;
+			case '800 Free':
+				$distance = 800;
+				break;
+			case '1500 Free':
+				$distance = 1500;
+				break;
+		}
+
+		if ($distance != 0) {
+			return $distance;
+		} else {
+			throw new \Exception("Invalid event", 1);
+		}
+  }
 }
