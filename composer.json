@@ -1,8 +1,14 @@
 {
   "name": "clsasc/equivalent-time",
+  "description": "A class based implementation of the British Swimming/SPORTSYSTEMS Equivalent Time Algorithm.",
+  "license": "Apache",
+  "homepage": "https://github.com/Chester-le-Street-ASC/EquivalentTime",
+  "require": {
+    "php": ">=5.6"
+  },
   "autoload": {
-    "psr-0" : {
-        "CLSASC\\EquivalentTime" : "src"
+    "psr-4" : {
+        "CLSASC\\EquivalentTime" : "src/CLSASC/EquivalentTime/"
     }
   }
 }
