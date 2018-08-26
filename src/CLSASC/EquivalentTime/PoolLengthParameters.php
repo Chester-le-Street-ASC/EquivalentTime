@@ -10,6 +10,11 @@ namespace CLSASC\EquivalentTime;
  */
 class PoolLengthParameters {
 
+  /**
+   * gets the pool length flag for use later
+   * @param  string $source_pool_length Source pool length, ie "50m", "25m"
+   * @return int    integer flag value
+   */
   public static function getFlag($source_pool_length) {
 		$flag;
 

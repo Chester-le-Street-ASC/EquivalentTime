@@ -12,6 +12,7 @@ require 'PoolMeasure.php';
  *
  * @copyright Chester-le-Street ASC https://github.com/Chester-le-Street-ASC
  * @author Chris Heppell https://github.com/clheppell
+ *
  */
 class EquivalentTime {
   private $source_pool_length;
@@ -23,6 +24,17 @@ class EquivalentTime {
   private $turns_per_hundred;
   private $formattedString;
 
+  /**
+   * The constructor for a time object. This will contain the information about
+   * the source pool and time, as well as T50
+   * @param string $source_pool_length descibes the length of the source pool,
+   * ie "50m"
+   * @param string $event              describes the event, ie "50 Free"
+   * @param double $time_source        time in the source pool as a double eg
+   * 62.56 or 27.59
+   * @throws Exception If pool length not known, Event not allowed in this length
+   * of pool or if input time is not a float
+   */
   public function __construct($source_pool_length, $event, $time_source) {
     $this->formattedString = false;
     // Check pool length
@@ -30,18 +42,20 @@ class EquivalentTime {
     $this->turns_per_hundred = Turns::perHundred($source_pool_length);
 
     if ($this->pool_length_flag == 0 || $this->turns_per_hundred == 0) {
-      throw new \Exception("Unknown Pool Length", 1);
+      throw new \Exception("Unknown pool length", 1);
     }
 
     // Is this event allowed for the source pool length?
     if (!EVENT::isAllowed($source_pool_length, $event)) {
-      throw new \Exception("Event not allowed in this pool", 1);
+      throw new \Exception("Event not allowed in this length of pool", 1);
     }
 
     $this->event = $event;
 
     // Verify the time at this step
-    //
+    if (gettype($time_source) != "double") {
+      throw new \Exception("Input time not a float", 1);
+    }
 
     // Take source pool lenth and leave or turn to 50m time
     $this->source_pool_length = $source_pool_length;
@@ -73,6 +87,13 @@ class EquivalentTime {
     }
   }
 
+  /**
+   * Method to get a conversion
+   *
+   * @author Chris Heppell https://github.com/clheppell
+   * @param string $target_pool_length string representing the length of pool to
+   * convert the time to
+   */
   public function getConversion($target_pool_length) {
     $pool_length_flag = PoolMeasure::getValue($target_pool_length, $this->event);
     $pool_measure = PoolMeasure::getValue($target_pool_length, $this->event);
@@ -103,6 +124,14 @@ class EquivalentTime {
     }
   }
 
+  /**
+   * Set the output type for conversions to a string. Default is false (output
+   * as float/double)
+   *
+   * @author Chris Heppell https://github.com/clheppell
+   * @param boolean $boolean set true to output conversion as a string, false to
+   * output a float (double)
+   */
   public function setOutputAsString($boolean) {
     $this->formattedString = $boolean;
   }

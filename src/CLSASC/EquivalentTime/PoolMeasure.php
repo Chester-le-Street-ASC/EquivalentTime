@@ -10,6 +10,13 @@ namespace CLSASC\EquivalentTime;
  */
 class PoolMeasure {
 
+  /**
+   * gets the value of the pool measure, used for conversions with non-metric
+   * pools
+   * @param  string $length length of pool
+   * @param  string $event  event (required for 33 1/3y, 25y and 20y pools)
+   * @return double pool measure
+   */
   public static function getValue($length, $event = null) {
 		$poolMeasure;
 

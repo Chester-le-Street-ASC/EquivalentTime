@@ -1,0 +1,1 @@
+PATH_TO_DIR\docs\vendor\bin>phpdoc -d ../../../src/CLSASC/EquivalentTime -t ../..

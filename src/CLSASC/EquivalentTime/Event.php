@@ -12,6 +12,12 @@ class Event {
 	private $ev;
 	private $spl;
 
+	/**
+	 * Function to let you know if the event is allowed in the pool
+	 * @param  string  $spl   the length of the source pool, ie "50m", "20m", "33 1/3m"
+	 * @param  string  $event the name of the event, ie "50 Free", "200 IM"
+	 * @return boolean true if event is allowed in pool, false otherwise
+	 */
   public static function isAllowed($spl = null, $event = null) {
 		if ($spl == null && $this->spl != null && $event ==
 		null && $this->ev != null) {
@@ -101,6 +107,13 @@ class Event {
 		return false;
   }
 
+	/**
+	 * Get the distance for the event
+	 * @param  string $event the name of the event, ie "1500 Free"
+	 * @return int    the distance of the event, ie 1500
+	 * @throws Exception if the event is invalid
+
+	 */
 	public static function distance($event = null) {
 		if ($event == null && $this->ev != null) {
 			$event = $this->ev;

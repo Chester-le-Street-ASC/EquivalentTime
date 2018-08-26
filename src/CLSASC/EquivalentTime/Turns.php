@@ -10,6 +10,11 @@ namespace CLSASC\EquivalentTime;
  */
 class Turns {
 
+  /**
+   * Returns the number of turns per hundred in a pool
+   * @param  string $source_pool_length the source pool length, ie "50m", "25y"
+   * @return int the number of turns per hundred
+   */
   public static function perHundred($source_pool_length) {
 		$flag;
 
@@ -38,6 +43,11 @@ class Turns {
 		return $flag;
   }
 
+  /**
+   * Get the turn factor, the key ingredient in conversions
+   * @param  string $event The event name, ie "400 IM"
+   * @return double turn factor
+   */
 	public static function getFactor($event) {
 		$turn_factor;
 
