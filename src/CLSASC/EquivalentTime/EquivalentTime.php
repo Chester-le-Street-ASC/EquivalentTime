@@ -78,6 +78,12 @@ class EquivalentTime {
         $d1 = $this->distance;
       }
 
+      if (($d1 == 1650 && $this->turns_per_hundred%2 == 0) || ($this->event ==
+      "200 IM" && $this->turns_per_hundred%2 == 0) || ($d1 == 50 &&
+      $this->turns_per_hundred%2 == 0)) {
+        throw new \Exception("Uncatered Conversion", 1);
+      }
+
       $num_turn_factor = $this->distance/100*($d1/100)*($this->turns_per_hundred-1);
       $turn_factor = Turns::getFactor($this->event);
 
@@ -99,7 +105,6 @@ class EquivalentTime {
     $pool_measure = PoolMeasure::getValue($target_pool_length, $this->event);
     $turns_per_hundred = Turns::perHundred($target_pool_length);
     $turn_factor = Turns::getFactor($this->event);
-    $turn_value = $turn_factor / $this->time_50;
 
     // Test for special case 1500 in yards pool
     $imperial_distance = $this->distance;
@@ -107,9 +112,17 @@ class EquivalentTime {
       $imperial_distance = 1650;
     }
 
+    $turn_value = $turn_factor / $this->time_50 * ($this->distance / 100);
+
     $dist_time = $this->time_50 * $pool_measure;
     $turn_time = $turn_value * ($imperial_distance / 100) * ($turns_per_hundred - 1);
     $conversion_time = $dist_time - $turn_time + 0.05;
+
+    /*
+    echo $dist_time . "\r\n";
+    echo $turn_time . "\r\n";
+    echo $conversion_time . "\r\n";
+    */
 
     $floored_time = floor(($conversion_time*10))/10;
 
