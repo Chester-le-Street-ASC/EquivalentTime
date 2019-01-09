@@ -115,3 +115,4 @@ class Turns {
 		return $turn_factor;
   }
 }
+

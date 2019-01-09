@@ -185,3 +185,4 @@ class EquivalentTime {
     $this->setOutputAsString(false);
   }
 }
+

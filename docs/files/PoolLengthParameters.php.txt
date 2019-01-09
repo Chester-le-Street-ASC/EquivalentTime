@@ -45,3 +45,4 @@ class PoolLengthParameters {
 		return $flag;
   }
 }
+
