@@ -2,6 +2,8 @@
 
 namespace CLSASC\EquivalentTime;
 
+use CLSASC\EquivalentTime\ConversionExceptions\IllegalEventException;
+
 /**
  * Handle the Pool Length Parameters. Creates a PoolMeasFlag
  *
@@ -149,7 +151,7 @@ class Event {
 		if ($distance != 0) {
 			return $distance;
 		} else {
-			throw new IllegalEventException("Invalid event", 1);
+			throw new IllegalEventException();
 		}
   }
 }

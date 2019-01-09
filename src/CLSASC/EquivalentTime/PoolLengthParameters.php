@@ -2,6 +2,8 @@
 
 namespace CLSASC\EquivalentTime;
 
+use CLSASC\EquivalentTime\ConversionExceptions\UndefinedPoolLengthException;
+
 /**
  * Handle the Pool Length Parameters. Creates a PoolMeasFlag
  *
@@ -39,7 +41,7 @@ class PoolLengthParameters {
 		}
 
     if ($flag == null) {
-      throw new UndefinedPoolLengthException($source_pool_length . ' is not defined');
+      throw new UndefinedPoolLengthException();
     }
 
 		return $flag;

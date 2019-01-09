@@ -2,6 +2,9 @@
 
 namespace CLSASC\EquivalentTime;
 
+use CLSASC\EquivalentTime\ConversionExceptions\IllegalEventException;
+use CLSASC\EquivalentTime\ConversionExceptions\UndefinedPoolLengthException;
+
 /**
  * Get the turns per hundred
  *
@@ -43,7 +46,7 @@ class Turns {
 		}
 
     if ($flag == null) {
-      throw new UndefinedPoolLengthException('Pool length not recognised');
+      throw new UndefinedPoolLengthException();
     }
 
 		return $flag;
@@ -109,7 +112,7 @@ class Turns {
 		}
 
 		if ($turn_factor == 0) {
-			throw new IllegalEventException("Unknown event", 1);
+			throw new IllegalEventException();
 		}
 
 		return $turn_factor;

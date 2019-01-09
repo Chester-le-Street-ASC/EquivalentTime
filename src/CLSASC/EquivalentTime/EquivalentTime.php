@@ -57,19 +57,27 @@ class EquivalentTime {
     $this->turns_per_hundred = Turns::perHundred($source_pool_length);
 
     if ($this->pool_length_flag == 0 || $this->turns_per_hundred == 0) {
-      throw new \UndefinedPoolLengthException("Unknown pool length");
+      throw new UndefinedPoolLengthException();
     }
 
     // Is this event allowed for the source pool length?
     if (!EVENT::isAllowed($source_pool_length, $event)) {
-      throw new IllegalEventException("Event not allowed in this length of pool", 1);
+      throw new IllegalEventException();
     }
 
     $this->event = $event;
 
+    if (gettype($time_source) == "integer") {
+      $time_source = (float) $time_source;
+    }
+
     // Verify the time at this step
     if (gettype($time_source) != "double") {
-      throw new InvalidArgumentException("Input time not a float", 1);
+      throw new \InvalidArgumentException();
+    }
+
+    if ($time_source < 0) {
+      throw new \InvalidArgumentException();
     }
 
     // Take source pool lenth and leave or turn to 50m time
@@ -96,7 +104,7 @@ class EquivalentTime {
       if (($d1 == 1650 && $this->turns_per_hundred%2 == 0) || ($this->event ==
       "200 IM" && $this->turns_per_hundred%2 == 0) || ($d1 == 50 &&
       $this->turns_per_hundred%2 == 0)) {
-        throw new UncateredConversionException("Uncatered Conversion", 1);
+        throw new UncateredConversionException();
       }
 
       $num_turn_factor = $this->distance/100*($d1/100)*($this->turns_per_hundred-1);
@@ -150,12 +158,13 @@ class EquivalentTime {
       $hunds = $floored_time - $seconds;
       $seconds = $seconds - $mins*60;
       if ($seconds < 0 || $mins < 0 || $seconds < 0) {
-        throw new NegativeOutputException('A component of the output was negative');
+        throw new NegativeOutputException();
+      } else {
+        return sprintf('%02d', $mins) . ":" . sprintf('%02d', $seconds) . ":" . round($hunds*10, 1);
       }
-      return sprintf('%02d', $mins) . ":" . sprintf('%02d', $seconds) . ":" . round($hunds*10, 1);
     } else {
-      if ($floored_times < 0) {
-        throw new NegativeOutputException('The output was negative');
+      if ($floored_time < 0) {
+        throw new NegativeOutputException();
       }
       return $floored_time;
     }

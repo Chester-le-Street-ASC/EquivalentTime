@@ -2,6 +2,8 @@
 
 namespace CLSASC\EquivalentTime;
 
+use CLSASC\EquivalentTime\ConversionExceptions\UncateredConversionException;
+
 /**
  * Get the turns per hundred
  *
@@ -89,7 +91,7 @@ class PoolMeasure {
     }
 
     if ($poolMeasure == null) {
-      throw new UncateredConversionException('A pool measure could not be found');
+      throw new UncateredConversionException();
     }
 
 		return $poolMeasure;
