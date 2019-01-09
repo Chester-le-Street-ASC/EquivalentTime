@@ -27,6 +27,9 @@ parameter is the length of pool you would like your time to be converted to.
 many times as you wish. To convert another time, create a new object and the old
 one will be garbage collected by PHP after it is no longer referenced.
 
+## Documentation
+[Full API Style documentation](/docs) is available (phpDocumentor).
+
 ## Accepted Source Pool Lengths
 Source Pool Length names are shown as they should be entered as a string to the
 converter object.
@@ -91,3 +94,7 @@ object.
 * `200 Back`
 * `200 IM`
 * `400 IM`
+
+## Exceptions
+The system will throw exceptions for error conditions. [Please read the
+docs](/docs) for full details on these.
